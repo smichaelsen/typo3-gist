@@ -14,18 +14,20 @@ $TCA['tt_content']['columns']['CType']['config']['items'][] = array(
 /**
  * New TCA column
  */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
-	'tt_content',
-	array(
-		'tx_gist_gisturl' => array(
-			'label' => 'LLL:EXT:gist/Resources/Private/Language/locallang_db.xml:tt_content.tx_gist_gisturl',
-			'config' => array(
-				'type' => 'input',
-				'size' => '40',
-			)
+$newColumn = array(
+	'tx_gist_gisturl' => array(
+		'label' => 'LLL:EXT:gist/Resources/Private/Language/locallang_db.xml:tt_content.tx_gist_gisturl',
+		'config' => array(
+			'type' => 'input',
+			'size' => '40',
 		)
 	)
 );
+if (class_exists('\TYPO3\CMS\Core\Utility\ExtensionManagementUtility')) {
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $newColumn);
+} else {
+	t3lib_extMgm::addTCAcolumns('tt_content', $newColumn);
+}
 
 /**
  * Columns for the new CE type
